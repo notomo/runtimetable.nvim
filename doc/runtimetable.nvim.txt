@@ -1,0 +1,56 @@
+*runtimetable.nvim.txt*
+
+==============================================================================
+Lua module: runtimetable                      *runtimetable.nvim-runtimetable*
+
+new({base_path})                                          *runtimetable.new()*
+  Returns table to set runtime file content.
+
+  Parameters: ~
+    {base_path} (string) base runtime directory path
+
+  Return: ~
+    (RuntimetableRuntime) |RuntimetableRuntime|
+
+save({runtime})                                          *runtimetable.save()*
+  Save runtime files.
+
+  Parameters: ~
+    {runtime} (RuntimetableRuntime) |RuntimetableRuntime|
+
+==============================================================================
+STRUCTURE                                        *runtimetable.nvim-STRUCTURE*
+
+RuntimetableRuntime                                      *RuntimetableRuntime*
+  Table to set |'runtimepath'| file or direcotry contents.
+
+
+==============================================================================
+EXAMPLES                                          *runtimetable.nvim-EXAMPLES*
+
+>
+  local path = vim.fn.stdpath("data") .. "/runtimetable"
+  vim.opt.runtimepath:prepend(path)
+  vim.opt.runtimepath:append(path .. "/after")
+
+  local runtime = require("runtimetable").new(path)
+
+  runtime.syntax["test.lua"] = function()
+    if vim.b.current_syntax then
+      return
+    end
+
+    vim.cmd.syntax({ args = { "match", "Comment", [["^\s*#.*"]] } })
+
+    vim.b.current_syntax = "test"
+  end
+
+  runtime.after.ftplugin["test.lua"] = function()
+    vim.bo.commentstring = "#%s"
+  end
+
+  require("runtimetable").save(runtime)
+<
+
+==============================================================================
+vim:tw=78:ts=8:ft=help
