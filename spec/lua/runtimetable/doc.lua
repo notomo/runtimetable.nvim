@@ -32,7 +32,7 @@ require("genvdoc").generate(full_plugin_name, {
     {
       name = "EXAMPLES",
       body = function()
-        return util.help_code_block(vim.trim(example))
+        return util.help_code_block(vim.trim(example), { language = "lua" })
       end,
     },
   },

@@ -25,9 +25,16 @@ runtime.after.ftplugin["test.lua"] = function()
   vim.bo.commentstring = "#%s"
 end
 
+runtime.doc["test.txt"] = [[
+*test.txt*
+
+============================================================================
+]]
+
 require("runtimetable").save(runtime)
 
 -- Created the following files:
 --  - {path}/syntax/test.lua
 --  - {path}/after/ftplugin/test.lua
+--  - {path}/doc/test.txt
 ```

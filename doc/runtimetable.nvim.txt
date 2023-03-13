@@ -24,12 +24,12 @@ STRUCTURE                                        *runtimetable.nvim-STRUCTURE*
 RuntimetableRuntime                                      *RuntimetableRuntime*
   Table to set |'runtimepath'| file or direcotry contents.
 
-- {[string]} (fun()|RuntimetableRuntime)
+- {[string]} (fun()|RuntimetableRuntime|string)
 
 ==============================================================================
 EXAMPLES                                          *runtimetable.nvim-EXAMPLES*
 
->
+>lua
   local path = vim.fn.stdpath("data") .. "/runtimetable"
   vim.opt.runtimepath:prepend(path)
   vim.opt.runtimepath:append(path .. "/after")
@@ -50,11 +50,18 @@ EXAMPLES                                          *runtimetable.nvim-EXAMPLES*
     vim.bo.commentstring = "#%s"
   end
 
+  runtime.doc["test.txt"] = [[
+  *test.txt*
+
+  ============================================================================
+  ]]
+
   require("runtimetable").save(runtime)
 
   -- Created the following files:
   --  - {path}/syntax/test.lua
   --  - {path}/after/ftplugin/test.lua
+  --  - {path}/doc/test.txt
 <
 
 ==============================================================================
