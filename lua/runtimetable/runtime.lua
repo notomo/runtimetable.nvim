@@ -26,7 +26,7 @@ if not ok then
   vim.api.nvim_echo({ { "not installed runtimetable: %s", "WarningMsg" } }, true, {})
   return
 end
-runtimetable._call(%q, %s)
+runtimetable._call(%q, %s, %q)
 ]]
 
 local make_file_content = function(content_source, path, base_path, dir_parts)
@@ -40,7 +40,7 @@ local make_file_content = function(content_source, path, base_path, dir_parts)
 
   local str = require("runtimetable.lib.function").executable_string(content_source)
   if not str then
-    return with_upvalue_template:format(path, base_path, vim.inspect(dir_parts, { newline = "" }))
+    return with_upvalue_template:format(path, base_path, vim.inspect(dir_parts, { newline = "" }), path)
   end
 
   return str
