@@ -1,6 +1,6 @@
 # runtimetable.nvim
 
-WIP
+Create runtime files from lua table.
 
 ## Example
 
@@ -26,4 +26,8 @@ runtime.after.ftplugin["test.lua"] = function()
 end
 
 require("runtimetable").save(runtime)
+
+-- Created the following files:
+--  - {path}/syntax/test.lua
+--  - {path}/after/ftplugin/test.lua
 ```

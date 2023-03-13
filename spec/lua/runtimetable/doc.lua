@@ -42,7 +42,7 @@ local gen_readme = function()
   local content = ([[
 # %s
 
-WIP
+Create runtime files from lua table.
 
 ## Example
 
