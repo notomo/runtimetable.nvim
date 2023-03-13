@@ -37,4 +37,26 @@ describe("runtimetable", function()
 
     assert.is_true(called)
   end)
+
+  it("shows a warning if runtimetable is already uninstalled", function()
+    local dir_path = helper.test_data:create_dir("dir")
+    vim.opt.runtimepath:prepend(dir_path)
+
+    local runtime = runtimetable.new(dir_path)
+
+    local dummy = false
+    runtime.lua.runtimetable_test["target.lua"] = function()
+      dummy = true
+    end
+    local _ = dummy
+
+    runtimetable.save(runtime)
+
+    vim.opt.runtimepath:remove(helper.root)
+    package.loaded["runtimetable"] = nil
+
+    vim.cmd.runtime("lua/runtimetable_test/target.lua")
+
+    assert.exists_message([[not installed runtimetable: ]])
+  end)
 end)
