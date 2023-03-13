@@ -2,6 +2,7 @@ local M = {}
 
 --- Table to set |'runtimepath'| file or direcotry contents.
 --- @class RuntimetableRuntime
+--- @field [string] fun()|RuntimetableRuntime
 
 --- Returns table to set runtime file content.
 --- @param base_path string base runtime directory path
