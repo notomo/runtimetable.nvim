@@ -75,4 +75,25 @@ vim.b.called = true
 
     assert.exists_message([[not installed runtimetable: ]])
   end)
+
+  it("shows a warning if runtimetable setting is wrong", function()
+    local dir_path = helper.test_data:create_dir("dir")
+    vim.opt.runtimepath:prepend(dir_path)
+
+    local runtime = runtimetable.new(dir_path)
+
+    local dummy = false
+    runtime.lua.runtimetable_test["target.lua"] = function()
+      dummy = true
+    end
+    local _ = dummy
+
+    runtimetable.save(runtime)
+
+    package.loaded["runtimetable.command"] = nil
+
+    vim.cmd.runtime("lua/runtimetable_test/target.lua")
+
+    assert.exists_message([[not found stored runtime: ]])
+  end)
 end)
