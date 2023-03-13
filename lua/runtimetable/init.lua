@@ -17,7 +17,7 @@ function M.save(runtime)
 end
 
 function M._call(base_path, dir_parts)
-  return require("runtimetable.command").call(base_path, dir_parts)
+  require("runtimetable.command").call(base_path, dir_parts)
 end
 
 return M
