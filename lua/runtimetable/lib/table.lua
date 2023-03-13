@@ -17,4 +17,12 @@ function M.walk(tbl, fn)
   _walk(tbl, {}, fn)
 end
 
+function M.find_key_by_value(tbl, value)
+  for key, v in pairs(tbl) do
+    if value == v then
+      return key
+    end
+  end
+end
+
 return M

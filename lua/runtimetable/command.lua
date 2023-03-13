@@ -9,33 +9,20 @@ function M.new(base_path)
 end
 
 function M.save(runtime)
-  local target_path
-  for path, r in pairs(_runtimes) do
-    if runtime == r then
-      target_path = path
-      break
-    end
-  end
-
-  if not target_path then
+  local base_path = require("runtimetable.lib.table").find_key_by_value(_runtimes, runtime)
+  if not base_path then
     error("not found runtime")
   end
-
-  require("runtimetable.runtime").save(target_path, runtime)
+  require("runtimetable.runtime").save(base_path, runtime)
 end
 
 function M.call(base_path, dir_parts)
-  local runtime = _runtimes[base_path]
-  if not runtime then
-    error("not found runtime for: " .. base_path)
+  local keys = { base_path, unpack(dir_parts) }
+  local fn = vim.tbl_get(_runtimes, unpack(keys))
+  if type(fn) ~= "function" then
+    error("unexpected runtime type: " .. type(fn))
   end
-
-  local f = vim.tbl_get(runtime, unpack(dir_parts))
-  if type(f) ~= "function" then
-    error("unexpected runtime type: " .. type(f))
-  end
-
-  f()
+  fn()
 end
 
 return M
