@@ -11,10 +11,14 @@ function M.new(base_path)
   return require("runtimetable.command").new(base_path)
 end
 
+--- @class RuntimetableSaveOption
+--- @field as_binary boolean save lua function as binary representation by |string.dump()| if without upvalue (default: false)
+
 --- Save runtime files.
 --- @param runtime RuntimetableRuntime |RuntimetableRuntime|
-function M.save(runtime)
-  require("runtimetable.command").save(runtime)
+--- @param opts RuntimetableSaveOption? |RuntimetableSaveOption|
+function M.save(runtime, opts)
+  require("runtimetable.command").save(runtime, opts)
 end
 
 function M._call(base_path, dir_parts, path)

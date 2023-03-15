@@ -8,12 +8,15 @@ function M.new(base_path)
   return runtime
 end
 
-function M.save(runtime)
+function M.save(runtime, opts)
+  opts = opts or {}
+  opts.as_binary = opts.as_binary or false
+
   local base_path = require("runtimetable.lib.table").find_key_by_value(_runtimes, runtime)
   if not base_path then
     error("not found runtime")
   end
-  require("runtimetable.runtime").save(base_path, runtime)
+  require("runtimetable.runtime").save(base_path, runtime, opts.as_binary)
 end
 
 function M.call(base_path, dir_parts, path)

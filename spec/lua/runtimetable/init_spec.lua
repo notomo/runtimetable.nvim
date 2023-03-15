@@ -54,6 +54,22 @@ vim.b.called = true
     assert.is_true(vim.b.called)
   end)
 
+  it("can create runtime files as binary representation", function()
+    local dir_path = helper.test_data:create_dir("dir")
+    vim.opt.runtimepath:prepend(dir_path)
+
+    local runtime = runtimetable.new(dir_path)
+
+    runtime.lua.runtimetable_test["target.lua"] = function()
+      vim.b.called = true
+    end
+
+    runtimetable.save(runtime, { as_binary = true })
+    vim.cmd.runtime("lua/runtimetable_test/target.lua")
+
+    assert.is_true(vim.b.called)
+  end)
+
   it("shows a warning if runtimetable is already uninstalled", function()
     local dir_path = helper.test_data:create_dir("dir")
     vim.opt.runtimepath:prepend(dir_path)

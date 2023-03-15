@@ -12,11 +12,12 @@ new({base_path})                                          *runtimetable.new()*
   Return: ~
     (RuntimetableRuntime) |RuntimetableRuntime|
 
-save({runtime})                                          *runtimetable.save()*
+save({runtime}, {opts})                                  *runtimetable.save()*
   Save runtime files.
 
   Parameters: ~
     {runtime} (RuntimetableRuntime) |RuntimetableRuntime|
+    {opts} (RuntimetableSaveOption?) |RuntimetableSaveOption|
 
 ==============================================================================
 STRUCTURE                                        *runtimetable.nvim-STRUCTURE*
@@ -25,6 +26,10 @@ RuntimetableRuntime                                      *RuntimetableRuntime*
   Table to set |'runtimepath'| file or direcotry contents.
 
 - {[string]} (fun()|RuntimetableRuntime|string)
+
+RuntimetableSaveOption                                *RuntimetableSaveOption*
+
+- {as_binary} (boolean) save lua function as binary representation by |string.dump()| if without upvalue (default: false)
 
 ==============================================================================
 EXAMPLES                                          *runtimetable.nvim-EXAMPLES*
@@ -56,7 +61,7 @@ EXAMPLES                                          *runtimetable.nvim-EXAMPLES*
   ============================================================================
   ]]
 
-  require("runtimetable").save(runtime)
+  require("runtimetable").save(runtime, { as_binary = true })
 
   -- Created the following files:
   --  - {path}/syntax/test.lua

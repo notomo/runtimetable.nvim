@@ -18,10 +18,14 @@ local remove_indent = function(lines)
   end, lines)
 end
 
-function M.executable_string(fn)
+function M.executable_string(fn, as_binary)
   local info = debug.getinfo(fn)
   if info.nups > 0 then
     return nil
+  end
+
+  if as_binary then
+    return string.dump(fn)
   end
 
   local content

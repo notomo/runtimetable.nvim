@@ -24,7 +24,7 @@ runtime.doc["test.txt"] = [[
 ============================================================================
 ]]
 
-require("runtimetable").save(runtime)
+require("runtimetable").save(runtime, { as_binary = true })
 
 -- Created the following files:
 --  - {path}/syntax/test.lua

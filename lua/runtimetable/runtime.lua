@@ -29,7 +29,7 @@ end
 runtimetable._call(%q, %s, %q)
 ]]
 
-local make_file_content = function(content_source, path, base_path, dir_parts)
+local make_file_content = function(content_source, path, base_path, dir_parts, as_binary)
   vim.validate({
     content_source = { content_source, { "string", "function" } },
   })
@@ -38,7 +38,7 @@ local make_file_content = function(content_source, path, base_path, dir_parts)
     return content_source
   end
 
-  local str = require("runtimetable.lib.function").executable_string(content_source)
+  local str = require("runtimetable.lib.function").executable_string(content_source, as_binary)
   if not str then
     return with_upvalue_template:format(path, base_path, vim.inspect(dir_parts, { newline = "" }), path)
   end
@@ -46,10 +46,10 @@ local make_file_content = function(content_source, path, base_path, dir_parts)
   return str
 end
 
-function M.save(base_path, runtime)
+function M.save(base_path, runtime, as_binary)
   require("runtimetable.lib.table").walk(runtime, function(content_source, dir_parts)
     local path = table.concat({ base_path, unpack(dir_parts) }, "/")
-    local content = make_file_content(content_source, path, base_path, dir_parts)
+    local content = make_file_content(content_source, path, base_path, dir_parts, as_binary)
 
     local dir_path = vim.fs.dirname(path)
     vim.fn.mkdir(dir_path, "p")
