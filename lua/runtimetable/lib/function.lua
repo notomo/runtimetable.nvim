@@ -12,10 +12,13 @@ local remove_indent = function(lines)
     return lines
   end
 
-  return vim.tbl_map(function(line)
-    line = line:gsub("^" .. indent, "")
-    return line
-  end, lines)
+  return vim
+    .iter(lines)
+    :map(function(line)
+      line = line:gsub("^" .. indent, "")
+      return line
+    end)
+    :totable()
 end
 
 function M.executable_string(fn, as_binary)
