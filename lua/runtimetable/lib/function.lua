@@ -35,6 +35,9 @@ function M.executable_string(fn, as_binary)
   local path = info.source:sub(2)
   if vim.startswith(info.source, "@") and vim.fn.filereadable(path) == 1 then
     local f = io.open(path, "r")
+    if not f then
+      error("[runtimetable] can't read path: " .. path)
+    end
     content = f:read("*a")
     f:close()
   else

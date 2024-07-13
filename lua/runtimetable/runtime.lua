@@ -48,13 +48,16 @@ end
 
 function M.save(base_path, runtime, as_binary)
   require("runtimetable.lib.table").walk(runtime, function(content_source, dir_parts)
-    local path = table.concat({ base_path, unpack(dir_parts) }, "/")
+    local path = vim.fs.joinpath(base_path, unpack(dir_parts))
     local content = make_file_content(content_source, path, base_path, dir_parts, as_binary)
 
     local dir_path = vim.fs.dirname(path)
     vim.fn.mkdir(dir_path, "p")
 
     local f = io.open(path, "w")
+    if not f then
+      error("[runtimetable] can't write path: " .. path)
+    end
     f:write(content)
     f:close()
   end)

@@ -14,7 +14,7 @@ function M.save(runtime, opts)
 
   local base_path = require("runtimetable.lib.table").find_key_by_value(_runtimes, runtime)
   if not base_path then
-    error("not found runtime")
+    error("[runtimetable] not found runtime")
   end
   require("runtimetable.runtime").save(base_path, runtime, opts.as_binary)
 end
