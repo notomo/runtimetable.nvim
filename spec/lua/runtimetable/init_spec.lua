@@ -1,5 +1,6 @@
 local helper = require("runtimetable.test.helper")
 local runtimetable = helper.require("runtimetable")
+local assert = require("assertlib").typed(assert)
 
 describe("runtimetable", function()
   before_each(helper.before_each)
