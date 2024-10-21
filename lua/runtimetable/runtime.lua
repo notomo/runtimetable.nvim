@@ -29,11 +29,8 @@ end
 runtimetable._call(%q, %s, %q)
 ]]
 
+--- @param content_source string|function
 local make_file_content = function(content_source, path, base_path, dir_parts, as_binary)
-  vim.validate({
-    content_source = { content_source, { "string", "function" } },
-  })
-
   if type(content_source) == "string" then
     return content_source
   end
