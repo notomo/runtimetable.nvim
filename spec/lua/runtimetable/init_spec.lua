@@ -1,6 +1,8 @@
+local ntf = require("ntf")
+local describe, it, before_each, after_each = ntf.describe, ntf.it, ntf.before_each, ntf.after_each
 local helper = require("runtimetable.test.helper")
-local runtimetable = helper.require("runtimetable")
-local assert = require("assertlib").typed(assert)
+local runtimetable = require("runtimetable")
+local assert = require("assertlib").typed(ntf.assert)
 
 describe("runtimetable", function()
   before_each(helper.before_each)
