@@ -10,7 +10,7 @@ describe("runtimetable", function()
 
   it("can create runtime files with non-upvalue", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 
@@ -26,7 +26,7 @@ describe("runtimetable", function()
 
   it("can create runtime files with upvalue", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 
@@ -43,7 +43,7 @@ describe("runtimetable", function()
 
   it("can create runtime files with string", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 
@@ -59,7 +59,7 @@ vim.b.called = true
 
   it("can create runtime files as binary representation", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 
@@ -75,7 +75,7 @@ vim.b.called = true
 
   it("shows a warning if runtimetable is already uninstalled", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 
@@ -87,7 +87,7 @@ vim.b.called = true
 
     runtimetable.save(runtime)
 
-    vim.opt.runtimepath:remove(helper.root)
+    vim.api.nvim_set_option_value("runtimepath", helper.root, { operation = "remove" })
     package.loaded["runtimetable"] = nil
 
     vim.cmd.runtime("lua/runtimetable_test/target.lua")
@@ -97,7 +97,7 @@ vim.b.called = true
 
   it("shows a warning if runtimetable setting is wrong", function()
     local dir_path = helper.test_data:create_dir("dir")
-    vim.opt.runtimepath:prepend(dir_path)
+    vim.api.nvim_set_option_value("runtimepath", dir_path, { operation = "prepend" })
 
     local runtime = runtimetable.new(dir_path)
 

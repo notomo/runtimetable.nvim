@@ -1,6 +1,6 @@
 local path = vim.fn.stdpath("data") .. "/runtimetable"
-vim.opt.runtimepath:prepend(path)
-vim.opt.runtimepath:append(path .. "/after")
+vim.api.nvim_set_option_value("runtimepath", path, { operation = "prepend" })
+vim.api.nvim_set_option_value("runtimepath", path .. "/after", { operation = "append" })
 
 local runtime = require("runtimetable").new(path)
 
